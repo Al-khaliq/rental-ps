@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="pBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070C18"/>
+      <stop offset="50%" stop-color="#00235B"/>
+      <stop offset="100%" stop-color="#080E1E"/>
+    </linearGradient>
+    <radialGradient id="pGlowLeft" cx="15%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#0070D1" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#0070D1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pGlowRight" cx="85%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pGlowCenter" cx="50%" cy="20%" r="45%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1440" height="600" fill="url(#pBg)"/>
+  <rect width="1440" height="600" fill="url(#pGlowLeft)"/>
+  <rect width="1440" height="600" fill="url(#pGlowRight)"/>
+  <rect width="1440" height="600" fill="url(#pGlowCenter)"/>
+
+  <!-- Racing / Gran Turismo Neon Perspective Grid -->
+  <g stroke="#38BDF8" stroke-opacity="0.14" stroke-width="1.2" fill="none">
+    <line x1="0" y1="480" x2="1440" y2="480"/>
+    <line x1="0" y1="530" x2="1440" y2="530"/>
+    <line x1="0" y1="575" x2="1440" y2="575"/>
+    <line x1="720" y1="360" x2="80" y2="600"/>
+    <line x1="720" y1="360" x2="400" y2="600"/>
+    <line x1="720" y1="360" x2="720" y2="600"/>
+    <line x1="720" y1="360" x2="1040" y2="600"/>
+    <line x1="720" y1="360" x2="1360" y2="600"/>
+  </g>
+
+  <!-- Football / FC 25 Tactical Arena Arc -->
+  <g stroke="#10B981" stroke-opacity="0.16" stroke-width="1.5" fill="none">
+    <circle cx="720" cy="300" r="140"/>
+    <circle cx="720" cy="300" r="55"/>
+    <line x1="720" y1="60" x2="720" y2="540"/>
+  </g>
+
+  <!-- Action / Spider-Man & RPG Diagonal Slash Beams -->
+  <g stroke="#0070D1" stroke-opacity="0.22" stroke-width="2">
+    <line x1="-40" y1="180" x2="420" y2="40"/>
+    <line x1="1020" y1="560" x2="1480" y2="390"/>
+  </g>
+  <g stroke="#EF4444" stroke-opacity="0.16" stroke-width="1.5">
+    <line x1="1080" y1="40" x2="1440" y2="190"/>
+    <line x1="0" y1="420" x2="320" y2="560"/>
+  </g>
+
+  <!-- DualSense & PlayStation Icon Watermarks -->
+  <g opacity="0.14" transform="translate(90, 95) rotate(-14)">
+    <path d="M22,34 C22,16 42,10 58,18 L102,18 C118,10 138,16 138,34 L148,80 C151,95 135,104 122,92 L107,72 L53,72 L38,92 C25,104 9,95 12,80 Z" fill="#E2E8F0"/>
+    <path d="M54,18 L106,18 L101,46 L59,46 Z" fill="#0F172A"/>
+  </g>
+
+  <g opacity="0.12" transform="translate(1190, 120) rotate(16)">
+    <path d="M22,34 C22,16 42,10 58,18 L102,18 C118,10 138,16 138,34 L148,80 C151,95 135,104 122,92 L107,72 L53,72 L38,92 C25,104 9,95 12,80 Z" fill="#38BDF8"/>
+    <path d="M54,18 L106,18 L101,46 L59,46 Z" fill="#0F172A"/>
+  </g>
+
+  <!-- Subtle PlayStation Symbols -->
+  <g fill="none" stroke-width="2.5" opacity="0.2">
+    <polygon points="350,110 370,145 330,145" stroke="#10B981"/>
+    <circle cx="1090" cy="430" r="18" stroke="#EF4444"/>
+    <path d="M250 420 L276 446 M276 420 L250 446" stroke="#60A5FA" stroke-linecap="round"/>
+    <rect x="1030" y="95" width="30" height="30" rx="3" stroke="#EC4899"/>
+  </g>
+</svg>
