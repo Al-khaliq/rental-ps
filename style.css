@@ -1,0 +1,243 @@
+/* =============================================
+   Rental PS – Custom Styles
+   stack: Tailwind CSS + custom vars
+   ============================================= */
+
+/* ---- Smooth Scroll ---- */
+html { scroll-behavior: smooth; }
+
+/* ---- Gradient Text ---- */
+.gradient-text {
+  background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Hero Glow Background ---- */
+.hero-bg-glow {
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 60%, rgba(37,99,235,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 30%, rgba(6,182,212,0.14) 0%, transparent 70%);
+}
+
+/* ---- Primary Button ---- */
+.btn-primary {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  color: #F8FAFC;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.4);
+}
+.btn-primary:active { transform: translateY(0); }
+
+/* ---- Shadow Glow ---- */
+.shadow-glow { box-shadow: 0 0 24px rgba(37,99,235,0.35); }
+
+/* ---- Glass Card ---- */
+.card-glass {
+  background: rgba(26,30,38,0.7);
+  border: 1px solid rgba(38,44,56,0.8);
+  backdrop-filter: blur(8px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-glass:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+  border-color: rgba(37,99,235,0.4);
+}
+
+/* ---- Unit Card ---- */
+.unit-card {
+  background: #1A1E26;
+  border: 1px solid #262C38;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.unit-card:hover {
+  border-color: rgba(37,99,235,0.5);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+  transform: translateY(-3px);
+}
+.unit-card.unavailable { opacity: 0.55; }
+
+/* ---- Paket Card ---- */
+.paket-card {
+  background: #1A1E26;
+  border: 1px solid #262C38;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.paket-card:hover {
+  border-color: rgba(37,99,235,0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+}
+.paket-card.featured {
+  border-color: rgba(37,99,235,0.7);
+  background: linear-gradient(135deg, #1A1E26 0%, #1D2535 100%);
+}
+.paket-card.featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(6,182,212,0.05) 100%);
+  pointer-events: none;
+}
+
+/* ---- Filter Buttons ---- */
+.filter-btn {
+  background: #1A1E26;
+  border: 1px solid #262C38;
+  color: #94A3B8;
+  transition: all 0.2s ease;
+}
+.filter-btn:hover {
+  border-color: rgba(37,99,235,0.5);
+  color: #F8FAFC;
+}
+.filter-btn.active {
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  border-color: #2563EB;
+  color: #F8FAFC;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+}
+
+/* ---- Status Badge ---- */
+.status-available {
+  background: rgba(16,185,129,0.15);
+  color: #10B981;
+  border: 1px solid rgba(16,185,129,0.3);
+}
+.status-unavailable {
+  background: rgba(239,68,68,0.15);
+  color: #EF4444;
+  border: 1px solid rgba(239,68,68,0.3);
+}
+.status-limited {
+  background: rgba(245,158,11,0.15);
+  color: #F59E0B;
+  border: 1px solid rgba(245,158,11,0.3);
+}
+
+/* ---- Modal ---- */
+.modal-overlay {
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+.modal-panel {
+  animation: slideUp 0.25s ease;
+}
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(24px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+
+/* ---- Quantity Control ---- */
+.qty-btn {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #262C38;
+  background: #262C38;
+  color: #F8FAFC;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+.qty-btn:hover { background: #2563EB; border-color: #2563EB; }
+.qty-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ---- Toast ---- */
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  animation: toastIn 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.toast-success { background: #0D2B1A; color: #10B981; border-color: rgba(16,185,129,0.3); }
+.toast-info    { background: #0D1A2B; color: #06B6D4;  border-color: rgba(6,182,212,0.3); }
+.toast-error   { background: #2B0D0D; color: #EF4444;  border-color: rgba(239,68,68,0.3); }
+.toast-warning { background: #2B1E0D; color: #F59E0B;  border-color: rgba(245,158,11,0.3); }
+.toast.hiding  { animation: toastOut 0.3s ease forwards; }
+@keyframes toastIn  { from { opacity:0; transform: translateX(100%); } to { opacity:1; transform: translateX(0); } }
+@keyframes toastOut { from { opacity:1; transform: translateX(0);    } to { opacity:0; transform: translateX(100%); } }
+
+/* ---- Cart Item ---- */
+.cart-item {
+  background: #262C38;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ---- Input focus ring override ---- */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.4);
+}
+
+/* ---- Navbar scrolled ---- */
+.navbar-scrolled {
+  background: rgba(17,19,24,0.97) !important;
+  border-color: rgba(38,44,56,0.6) !important;
+}
+
+/* ---- Responsive touch targets ---- */
+@media (max-width: 640px) {
+  .btn-primary { min-height: 44px; }
+  .filter-btn  { min-height: 40px; }
+  .qty-btn     { width: 2.5rem; height: 2.5rem; }
+}
+
+/* ---- Scrollbar styling ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #1A1E26; }
+::-webkit-scrollbar-thumb { background: #262C38; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2563EB; }
+
+/* ---- Unit card image area ---- */
+.unit-emoji-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  background: linear-gradient(135deg, #262C38, #1A1E26);
+  font-size: 4rem;
+  position: relative;
+}
+
+/* ---- Stagger animation for cards ---- */
+.unit-card, .paket-card {
+  animation: cardIn 0.4s ease both;
+}
+@keyframes cardIn { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
