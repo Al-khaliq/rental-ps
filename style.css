@@ -395,6 +395,30 @@ body::before {
   margin-top: 2px;
 }
 
+/* ---- Paket Section Game Background ---- */
+.paket-section {
+  background-color: #070B14;
+}
+.paket-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.65;
+  z-index: 0;
+  pointer-events: none;
+}
+.paket-bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(9, 13, 22, 0.92) 0%, rgba(0, 35, 91, 0.62) 50%, rgba(9, 13, 22, 0.94) 100%);
+  pointer-events: none;
+}
+
 /* ---- Paket & Unit Cards ---- */
 .paket-card, .unit-card {
   background: var(--card);
