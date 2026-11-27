@@ -12,7 +12,7 @@
   <title>Rental PS – Sewa PlayStation PS4 & PS5</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
   <script>
@@ -20,17 +20,27 @@
       theme: {
         extend: {
           colors: {
-            bg:      '#111318',
-            surface: '#1A1E26',
-            mid:     '#262C38',
-            light:   '#F8FAFC',
+            bg:      '#0C0E14',
+            surface: '#131720',
+            card:    '#181D27',
+            mid:     '#232A38',
+            border:  '#2A3245',
+            light:   '#F1F5F9',
             electric:'#2563EB',
+            electric2:'#3B82F6',
             cyan:    '#06B6D4',
-            muted:   '#94A3B8',
+            cyan2:   '#22D3EE',
+            purple:  '#7C3AED',
+            muted:   '#64748B',
+            muted2:  '#94A3B8',
             danger:  '#EF4444',
-            success: '#10B981'
+            success: '#10B981',
           },
-          fontFamily: { sans: ['Inter','sans-serif'] }
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          animation: {
+            'fade-in':  'fadeIn 0.4s ease both',
+            'slide-up': 'slideUp 0.5s ease both',
+          }
         }
       }
     }
@@ -38,251 +48,438 @@
 </head>
 <body class="bg-bg text-light font-sans min-h-screen">
 
-  <!-- ===== NAVBAR ===== -->
-  <nav id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-bg/80 backdrop-blur-md border-b border-mid/40">
+  <!-- ============================================================
+       NAVBAR
+       ============================================================ -->
+  <nav id="navbar">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <a href="#hero" class="flex items-center gap-2 text-xl font-bold">
-          <span class="text-2xl">🎮</span>
-          <span class="text-electric">Rental</span><span class="text-cyan">PS</span>
+      <div class="flex items-center justify-between h-16 md:h-18">
+
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center gap-2.5 select-none">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-electric to-cyan flex items-center justify-center text-lg shadow-glow-sm">🎮</div>
+          <span class="text-lg font-black tracking-tight">
+            <span class="text-white">Rental</span><span style="background:linear-gradient(135deg,#60A5FA,#22D3EE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PS</span>
+          </span>
         </a>
-        <div class="hidden md:flex items-center gap-6 text-sm font-medium">
-          <a href="#about"   class="nav-link text-muted hover:text-light transition-colors">Tentang</a>
-          <a href="#catalog" class="nav-link text-muted hover:text-light transition-colors">Katalog</a>
-          <a href="#paket"   class="nav-link text-muted hover:text-light transition-colors">Paket</a>
-          <a href="#catalog" class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold">Sewa Sekarang</a>
+
+        <!-- Desktop nav -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#about"   class="nav-link">Tentang</a>
+          <a href="#paket"   class="nav-link">Paket</a>
+          <a href="#catalog" class="nav-link">Katalog</a>
+          <a href="#catalog" class="btn-primary px-5 py-2 rounded-xl text-sm">🎮 Sewa Sekarang</a>
         </div>
-        <button id="menuBtn" class="md:hidden p-2 rounded-lg text-muted hover:text-light hover:bg-mid transition-colors" aria-label="Buka menu">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+
+        <!-- Hamburger -->
+        <button id="menuBtn" class="md:hidden p-2 rounded-xl text-muted2 hover:text-light hover:bg-mid transition-all" aria-label="Menu" aria-expanded="false">
+          <svg id="iconMenu"  class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg id="iconClose" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
     </div>
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="md:hidden hidden border-t border-mid/40 bg-surface">
-      <div class="px-4 py-4 flex flex-col gap-3 text-sm font-medium">
-        <a href="#about"   class="mobile-nav-link py-2 text-muted hover:text-light transition-colors">Tentang</a>
-        <a href="#catalog" class="mobile-nav-link py-2 text-muted hover:text-light transition-colors">Katalog</a>
-        <a href="#paket"   class="mobile-nav-link py-2 text-muted hover:text-light transition-colors">Paket</a>
-        <a href="#catalog" class="mobile-nav-link btn-primary px-4 py-2 rounded-lg text-center font-semibold">Sewa Sekarang</a>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-border/50" style="background:rgba(19,23,32,0.98);backdrop-filter:blur(20px)">
+      <div class="px-4 py-5 flex flex-col gap-1">
+        <a href="#about"   class="mobile-nav-link px-4 py-3 rounded-xl text-sm font-medium text-muted2 hover:text-light hover:bg-mid/60 transition-all">Tentang Kami</a>
+        <a href="#paket"   class="mobile-nav-link px-4 py-3 rounded-xl text-sm font-medium text-muted2 hover:text-light hover:bg-mid/60 transition-all">Paket & Harga</a>
+        <a href="#catalog" class="mobile-nav-link px-4 py-3 rounded-xl text-sm font-medium text-muted2 hover:text-light hover:bg-mid/60 transition-all">Katalog Unit</a>
+        <div class="pt-2">
+          <a href="#catalog" class="mobile-nav-link btn-primary w-full py-3 rounded-xl text-sm text-center block">🎮 Sewa Sekarang</a>
+        </div>
       </div>
     </div>
   </nav>
 
-  <!-- ===== HERO ===== -->
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
   <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-    <div class="hero-bg-glow absolute inset-0 pointer-events-none"></div>
-    <div class="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
-      <div class="inline-flex items-center gap-2 bg-electric/10 border border-electric/30 rounded-full px-4 py-1.5 mb-6 text-xs font-semibold text-electric uppercase tracking-widest">
-        <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-cyan"></span></span>
-        Unit Tersedia Sekarang
+    <!-- Animated background -->
+    <div class="hero-mesh"></div>
+    <div class="hero-orb-purple"></div>
+
+    <div class="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto w-full">
+
+      <!-- Live badge -->
+      <div class="inline-flex items-center gap-2.5 bg-surface/80 border border-border/80 rounded-full px-4 py-2 mb-8 text-xs font-semibold text-muted2 backdrop-blur-sm">
+        <div class="ping-dot"><span></span><span></span></div>
+        <span>Unit <span class="text-cyan font-bold">Tersedia</span> Sekarang</span>
+        <span class="w-1 h-1 rounded-full bg-border"></span>
+        <span class="text-muted">Respon cepat via WA</span>
       </div>
-      <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black leading-tight mb-6">
-        Main <span class="gradient-text">PS4 & PS5</span><br/>Langsung Seru!
+
+      <!-- Main headline -->
+      <h1 class="font-black leading-none tracking-tighter mb-6" style="font-size:clamp(2.5rem,8vw,5.5rem)">
+        Sewa <span class="gradient-text">PS4 & PS5</span><br>
+        <span style="color:#E2E8F0">Langsung Main!</span>
       </h1>
-      <p class="text-muted text-base sm:text-lg lg:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-        Sewa PlayStation harian & paket weekend. Harga terjangkau, unit bersih, booking mudah via WhatsApp. Cocok buat mabar sama teman atau keluarga di rumah!
+
+      <!-- Sub -->
+      <p class="text-muted2 max-w-xl mx-auto mb-10 leading-relaxed" style="font-size:clamp(0.9375rem,2vw,1.125rem)">
+        Platform sewa PlayStation harian & weekend. Harga transparan, unit bersih, booking 1 menit via WhatsApp. Cocok buat mabar keluarga & teman!
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#catalog" class="btn-primary px-8 py-4 rounded-xl font-bold text-base sm:text-lg shadow-glow">
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-3 justify-center mb-16">
+        <a href="#catalog" class="btn-primary px-8 py-4 rounded-2xl text-base font-bold shadow-glow">
           🎮 Cek Paket & Sewa
         </a>
-        <a href="#about" class="px-8 py-4 rounded-xl font-bold text-base sm:text-lg border border-mid/60 text-muted hover:text-light hover:border-electric/50 transition-all duration-300">
+        <a href="#about" class="btn-ghost px-8 py-4 rounded-2xl text-base font-bold">
           Pelajari Lebih Lanjut
         </a>
       </div>
-      <!-- Stats -->
-      <div class="mt-16 grid grid-cols-3 gap-4 max-w-sm mx-auto sm:max-w-lg sm:gap-8">
-        <div class="text-center"><div class="text-2xl sm:text-3xl font-black text-electric">50+</div><div class="text-xs sm:text-sm text-muted mt-1">Unit Tersedia</div></div>
-        <div class="text-center border-x border-mid/40"><div class="text-2xl sm:text-3xl font-black text-cyan">4.9★</div><div class="text-xs sm:text-sm text-muted mt-1">Rating Pelanggan</div></div>
-        <div class="text-center"><div class="text-2xl sm:text-3xl font-black text-electric">2K+</div><div class="text-xs sm:text-sm text-muted mt-1">Transaksi Sukses</div></div>
+
+      <!-- Stats strip -->
+      <div class="hero-stat-strip max-w-sm sm:max-w-md mx-auto">
+        <div class="hero-stat-item">
+          <div class="hero-stat-num" style="color:#60A5FA">50+</div>
+          <div class="hero-stat-label">Unit Aktif</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num" style="background:linear-gradient(135deg,#60A5FA,#22D3EE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">4.9★</div>
+          <div class="hero-stat-label">Rating Pelanggan</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num" style="color:#22D3EE">2K+</div>
+          <div class="hero-stat-label">Transaksi Sukses</div>
+        </div>
       </div>
     </div>
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-      <svg class="w-5 h-5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+
+    <!-- Scroll arrow -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40" style="animation:bounce 2s infinite">
+      <span class="text-xs text-muted2 font-medium tracking-widest uppercase" style="font-size:0.6rem">Scroll</span>
+      <svg class="w-4 h-4 text-muted2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </div>
   </section>
 
-  <!-- ===== ABOUT ===== -->
-  <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <span class="text-xs font-bold uppercase tracking-widest text-cyan">Tentang Kami</span>
-        <h2 class="text-3xl sm:text-4xl font-black mt-3 mb-5 leading-tight">Pengalaman Gaming <span class="gradient-text">Terbaik</span> Tanpa Beli Konsol</h2>
-        <p class="text-muted leading-relaxed mb-6">Rental PS hadir sejak 2020 untuk menjawab kebutuhan gamer yang ingin menikmati PS4 & PS5 tanpa harus beli. Kami menyediakan unit yang terawat, game library lengkap, dan layanan antar-jemput untuk wilayah sekitar.</p>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3"><span class="mt-0.5 w-5 h-5 rounded-full bg-electric/20 flex items-center justify-center flex-shrink-0 text-electric text-xs">✓</span><span class="text-sm text-muted">Unit PS4 Slim, PS4 Pro, PS5 Disc Edition terawat & bersih</span></li>
-          <li class="flex items-start gap-3"><span class="mt-0.5 w-5 h-5 rounded-full bg-electric/20 flex items-center justify-center flex-shrink-0 text-electric text-xs">✓</span><span class="text-sm text-muted">Stik DualSense & DualShock 4 original, baterai penuh</span></li>
-          <li class="flex items-start gap-3"><span class="mt-0.5 w-5 h-5 rounded-full bg-electric/20 flex items-center justify-center flex-shrink-0 text-electric text-xs">✓</span><span class="text-sm text-muted">Layanan antar-jemput di radius 10 km (syarat & ketentuan berlaku)</span></li>
-          <li class="flex items-start gap-3"><span class="mt-0.5 w-5 h-5 rounded-full bg-electric/20 flex items-center justify-center flex-shrink-0 text-electric text-xs">✓</span><span class="text-sm text-muted">Paket Sabtu-Minggu lebih hemat hingga 30% dari harga harian</span></li>
-        </ul>
-      </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="card-glass rounded-2xl p-5 text-center">
-          <div class="text-4xl mb-3">🕹️</div>
-          <div class="font-bold text-sm">PS4 Slim</div>
-          <div class="text-muted text-xs mt-1">Tersedia 15 unit</div>
-        </div>
-        <div class="card-glass rounded-2xl p-5 text-center">
-          <div class="text-4xl mb-3">🎮</div>
-          <div class="font-bold text-sm">PS4 Pro</div>
-          <div class="text-muted text-xs mt-1">Tersedia 10 unit</div>
-        </div>
-        <div class="card-glass rounded-2xl p-5 text-center col-span-2 sm:col-span-1">
-          <div class="text-4xl mb-3">⚡</div>
-          <div class="font-bold text-sm">PS5 Disc</div>
-          <div class="text-muted text-xs mt-1">Tersedia 8 unit</div>
-        </div>
-        <div class="card-glass rounded-2xl p-5 text-center col-span-2 sm:col-span-1">
-          <div class="text-4xl mb-3">📦</div>
-          <div class="font-bold text-sm">Paket Weekend</div>
-          <div class="text-muted text-xs mt-1">Hemat hingga 30%</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PAKET HARGA ===== -->
-  <section id="paket" class="py-20 px-4 sm:px-6 lg:px-8 bg-surface/50">
+  <!-- ============================================================
+       ABOUT
+       ============================================================ -->
+  <section id="about" class="py-24 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-12">
-        <span class="text-xs font-bold uppercase tracking-widest text-cyan">Paket & Harga</span>
-        <h2 class="text-3xl sm:text-4xl font-black mt-3 leading-tight">Pilih Paket <span class="gradient-text">Terjangkau</span></h2>
-        <p class="text-muted mt-3 max-w-xl mx-auto text-sm">Harga transparan, tidak ada biaya tersembunyi. Semua sudah termasuk listrik & game library akses.</p>
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Left: Text -->
+        <div>
+          <div class="section-label mb-4">Tentang Kami</div>
+          <h2 class="section-title mb-5">
+            Gaming Seru<br><span class="gradient-text">Tanpa Beli Konsol</span>
+          </h2>
+          <p class="text-muted2 leading-relaxed mb-8 text-sm sm:text-base">
+            Rental PS hadir sejak 2020 untuk menjawab kebutuhan gamer yang ingin menikmati PS4 & PS5 tanpa harus beli. Unit terawat, game library lengkap, dan layanan antar-jemput untuk wilayah sekitar.
+          </p>
+          <div class="space-y-0 rounded-2xl overflow-hidden border border-border">
+            <div class="check-item px-5">
+              <span class="check-icon">✓</span>
+              <span class="text-sm text-muted2">Unit PS4 Slim, PS4 Pro & PS5 Disc Edition — terawat & bersih</span>
+            </div>
+            <div class="check-item px-5">
+              <span class="check-icon">✓</span>
+              <span class="text-sm text-muted2">Stik DualSense & DualShock 4 original, baterai penuh</span>
+            </div>
+            <div class="check-item px-5">
+              <span class="check-icon">✓</span>
+              <span class="text-sm text-muted2">Layanan antar-jemput radius 10 km (syarat & ketentuan berlaku)</span>
+            </div>
+            <div class="check-item px-5">
+              <span class="check-icon">✓</span>
+              <span class="text-sm text-muted2">Paket Weekend hemat hingga 30% dari harga harian</span>
+            </div>
+            <div class="check-item px-5">
+              <span class="check-icon">✓</span>
+              <span class="text-sm text-muted2">Booking mudah — cukup chat WhatsApp, langsung konfirmasi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Feature Cards -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="feature-card">
+            <div class="feature-icon feature-icon-blue">🕹️</div>
+            <div class="font-bold text-sm mb-1">PS4 Slim</div>
+            <div class="text-muted text-xs leading-relaxed">Cocok buat gaming santai. 15 unit tersedia.</div>
+            <div class="mt-3 text-xs font-semibold" style="color:#60A5FA">Rp 75.000/hari →</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon feature-icon-cyan">🎮</div>
+            <div class="font-bold text-sm mb-1">PS4 Pro</div>
+            <div class="text-muted text-xs leading-relaxed">4K HDR. Grafis maximal. 10 unit tersedia.</div>
+            <div class="mt-3 text-xs font-semibold" style="color:#22D3EE">Rp 100.000/hari →</div>
+          </div>
+          <div class="feature-card col-span-2" style="background:linear-gradient(145deg,#131720,#1A2235);border-color:rgba(37,99,235,0.35)">
+            <div class="flex items-center gap-4">
+              <div class="feature-icon feature-icon-purple" style="margin-bottom:0;flex-shrink:0">⚡</div>
+              <div>
+                <div class="font-bold mb-1">PS5 Disc Edition</div>
+                <div class="text-muted text-xs leading-relaxed">SSD ultra-cepat, Ray Tracing, DualSense haptic. Pengalaman next-gen!</div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-border/60">
+              <div>
+                <div class="text-xs text-muted">Mulai dari</div>
+                <div class="font-black" style="color:#60A5FA">Rp 150.000<span class="text-muted text-xs font-normal">/hari</span></div>
+              </div>
+              <div class="text-xs bg-electric/15 text-electric2 border border-electric/25 px-3 py-1 rounded-full font-semibold">8 Unit Tersedia</div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon feature-icon-green">📦</div>
+            <div class="font-bold text-sm mb-1">Paket Weekend</div>
+            <div class="text-muted text-xs leading-relaxed">Sabtu–Minggu lebih hemat 30%!</div>
+            <div class="mt-3 text-xs font-semibold text-success">Hemat 30% →</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.22)">🚀</div>
+            <div class="font-bold text-sm mb-1">Antar-Jemput</div>
+            <div class="text-muted text-xs leading-relaxed">Radius 10 km. Hubungi admin untuk jadwal.</div>
+            <div class="mt-3 text-xs font-semibold text-warning">Tanya admin →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAKET HARGA
+       ============================================================ -->
+  <section id="paket" class="py-24 px-4 sm:px-6 lg:px-8" style="background:linear-gradient(180deg,#0C0E14 0%,#101420 50%,#0C0E14 100%)">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14">
+        <div class="section-label justify-center mb-4">Paket & Harga</div>
+        <h2 class="section-title">Pilih Paket <span class="gradient-text">Terjangkau</span></h2>
+        <p class="text-muted2 mt-4 max-w-lg mx-auto text-sm leading-relaxed">
+          Harga transparan tanpa biaya tersembunyi. Semua sudah termasuk listrik & akses game library.
+        </p>
       </div>
       <div id="paketGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
     </div>
   </section>
 
-  <!-- ===== KATALOG ===== -->
-  <section id="catalog" class="py-20 px-4 sm:px-6 lg:px-8">
+  <!-- ============================================================
+       KATALOG
+       ============================================================ -->
+  <section id="catalog" class="py-24 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-10">
-        <span class="text-xs font-bold uppercase tracking-widest text-cyan">Katalog Unit</span>
-        <h2 class="text-3xl sm:text-4xl font-black mt-3 leading-tight">Pilih Unit <span class="gradient-text">Favoritmu</span></h2>
+      <div class="text-center mb-12">
+        <div class="section-label justify-center mb-4">Katalog Unit</div>
+        <h2 class="section-title">Pilih Unit <span class="gradient-text">Favoritmu</span></h2>
       </div>
-      <!-- Filter & Search -->
-      <div class="flex flex-col sm:flex-row gap-3 mb-8">
-        <div class="relative flex-1">
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
-          <input id="searchInput" type="text" placeholder="Cari unit atau paket..." class="w-full bg-surface border border-mid/60 rounded-xl pl-10 pr-4 py-3 text-sm placeholder-muted text-light focus:outline-none focus:border-electric transition-colors" autocomplete="off" maxlength="80" />
+
+      <!-- Filter & Search Row -->
+      <div class="flex flex-col gap-4 mb-10">
+        <div class="search-wrap">
+          <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+          </svg>
+          <input id="searchInput" class="search-input" type="text" placeholder="Cari unit atau paket..." autocomplete="off" maxlength="80" />
         </div>
-        <div id="filterBtns" class="flex gap-2 flex-wrap">
-          <button data-filter="semua" class="filter-btn active px-4 py-2.5 rounded-xl text-sm font-semibold transition-all">Semua</button>
-          <button data-filter="ps4"   class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold transition-all">PS4</button>
-          <button data-filter="ps5"   class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold transition-all">PS5</button>
-          <button data-filter="weekend" class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold transition-all">Weekend</button>
-          <button data-filter="stik"  class="filter-btn px-4 py-2.5 rounded-xl text-sm font-semibold transition-all">+Stik</button>
+        <div id="filterBtns" class="filter-bar">
+          <button data-filter="semua"   class="filter-btn active px-5 py-2.5 rounded-xl transition-all">Semua</button>
+          <button data-filter="ps4"     class="filter-btn px-5 py-2.5 rounded-xl transition-all">🕹️ PS4</button>
+          <button data-filter="ps5"     class="filter-btn px-5 py-2.5 rounded-xl transition-all">⚡ PS5</button>
+          <button data-filter="weekend" class="filter-btn px-5 py-2.5 rounded-xl transition-all">📅 Weekend</button>
+          <button data-filter="stik"    class="filter-btn px-5 py-2.5 rounded-xl transition-all">🎯 +Stik</button>
         </div>
       </div>
-      <div id="catalogGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-      <div id="emptyState" class="hidden text-center py-16">
-        <div class="text-5xl mb-4">🔍</div>
-        <p class="text-muted">Unit tidak ditemukan. Coba kata kunci lain.</p>
+
+      <div id="catalogGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
+
+      <div id="emptyState" class="hidden text-center py-20">
+        <div class="text-6xl mb-5">🔍</div>
+        <p class="text-muted2 font-semibold">Unit tidak ditemukan</p>
+        <p class="text-muted text-sm mt-1">Coba kata kunci atau filter lain.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== KERANJANG FLOATING ===== -->
+  <!-- ============================================================
+       CART FAB
+       ============================================================ -->
   <div id="cartFab" class="fixed bottom-6 right-6 z-40 hidden">
-    <button id="cartBtn" class="btn-primary w-14 h-14 rounded-full shadow-glow flex items-center justify-center relative" aria-label="Buka keranjang">
-      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6h11M10 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm7 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/></svg>
-      <span id="cartBadge" class="absolute -top-1 -right-1 bg-cyan text-bg text-xs font-black rounded-full w-5 h-5 flex items-center justify-center"></span>
+    <button id="cartBtn" class="btn-primary w-14 h-14 rounded-full shadow-glow relative" aria-label="Buka keranjang">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6h11M10 21a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm7 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+      </svg>
+      <span id="cartBadge" class="absolute -top-1.5 -right-1.5 bg-cyan text-bg text-xs font-black rounded-full w-5 h-5 flex items-center justify-center"></span>
     </button>
   </div>
 
-  <!-- ===== MODAL KERANJANG ===== -->
-  <div id="cartModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
-    <div class="modal-panel w-full sm:max-w-lg bg-surface rounded-t-2xl sm:rounded-2xl max-h-[90vh] flex flex-col overflow-hidden border border-mid/60">
-      <div class="flex items-center justify-between p-5 border-b border-mid/40">
-        <h3 id="cartModalTitle" class="font-bold text-lg">🛒 Keranjang Sewa</h3>
-        <button id="closeCartBtn" class="p-1.5 rounded-lg text-muted hover:text-light hover:bg-mid transition-colors" aria-label="Tutup keranjang">
+  <!-- ============================================================
+       MODAL KERANJANG
+       ============================================================ -->
+  <div id="cartModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+       role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
+    <div class="modal-panel w-full sm:max-w-lg flex flex-col overflow-hidden border border-border/70"
+         style="background:var(--surface);border-radius:1.5rem 1.5rem 0 0;max-height:92vh">
+      <div class="sm:hidden w-10 h-1 bg-border rounded-full mx-auto mt-3 mb-1"></div>
+
+      <!-- Header -->
+      <div class="flex items-center justify-between px-5 py-4 border-b border-border/60">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-electric/15 border border-electric/25 flex items-center justify-center text-sm">🛒</div>
+          <h3 id="cartModalTitle" class="font-bold">Keranjang Sewa</h3>
+        </div>
+        <button id="closeCartBtn" class="p-1.5 rounded-xl text-muted hover:text-light hover:bg-mid transition-all" aria-label="Tutup">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
-      <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
-      <div id="cartEmpty" class="flex-1 flex flex-col items-center justify-center p-10 text-muted">
-        <div class="text-5xl mb-4">🛒</div>
-        <p class="text-sm">Keranjang masih kosong.</p>
-        <p class="text-xs mt-1">Tambahkan unit dari katalog.</p>
+
+      <!-- Items -->
+      <div id="cartItems" class="flex-1 overflow-y-auto px-5 py-4 space-y-3"></div>
+
+      <!-- Empty -->
+      <div id="cartEmpty" class="flex-1 flex flex-col items-center justify-center px-5 py-14 text-center">
+        <div class="text-6xl mb-4">🛒</div>
+        <p class="font-semibold text-muted2">Keranjang masih kosong</p>
+        <p class="text-xs text-muted mt-1">Tambahkan unit dari katalog di bawah.</p>
       </div>
-      <div id="cartFooter" class="hidden p-5 border-t border-mid/40 space-y-3">
-        <div class="flex justify-between items-center text-sm">
-          <span class="text-muted">Total Estimasi:</span>
-          <span id="cartTotal" class="text-xl font-black text-electric"></span>
+
+      <!-- Footer -->
+      <div id="cartFooter" class="hidden px-5 py-4 border-t border-border/60 space-y-3">
+        <div class="flex justify-between items-center py-2 px-3 rounded-xl bg-mid/40">
+          <span class="text-sm text-muted2">Total Estimasi</span>
+          <span id="cartTotal" class="text-xl font-black" style="background:linear-gradient(135deg,#60A5FA,#22D3EE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text"></span>
         </div>
-        <button id="checkoutBtn" class="btn-primary w-full py-3.5 rounded-xl font-bold text-sm">📲 Lanjut ke Booking WhatsApp</button>
-        <button id="clearCartBtn" class="w-full py-3 rounded-xl font-semibold text-sm text-muted hover:text-danger border border-mid/40 hover:border-danger/40 transition-all">🗑️ Kosongkan Keranjang</button>
+        <button id="checkoutBtn" class="btn-primary w-full py-3.5 rounded-xl font-bold text-sm">
+          📲 Lanjut ke Booking WhatsApp
+        </button>
+        <button id="clearCartBtn" class="w-full py-3 rounded-xl text-sm font-semibold text-muted hover:text-danger border border-border/60 hover:border-danger/40 transition-all">
+          🗑️ Kosongkan Keranjang
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- ===== MODAL FORM PENYEWA ===== -->
-  <div id="bookingModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
-    <div class="modal-panel w-full max-w-md bg-surface rounded-2xl border border-mid/60 overflow-hidden">
-      <div class="flex items-center justify-between p-5 border-b border-mid/40">
-        <h3 id="bookingModalTitle" class="font-bold text-lg">📋 Data Penyewa</h3>
-        <button id="closeBookingBtn" class="p-1.5 rounded-lg text-muted hover:text-light hover:bg-mid transition-colors" aria-label="Tutup form">
+  <!-- ============================================================
+       MODAL FORM PENYEWA
+       ============================================================ -->
+  <div id="bookingModal" class="modal-overlay hidden fixed inset-0 z-50 flex items-center justify-center p-4"
+       role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="modal-panel w-full max-w-md border border-border/70 overflow-hidden"
+         style="background:var(--surface);border-radius:1.5rem">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between px-6 py-5 border-b border-border/60"
+           style="background:linear-gradient(135deg,rgba(37,99,235,0.08),rgba(6,182,212,0.04))">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-electric/15 border border-electric/25 flex items-center justify-center">📋</div>
+          <div>
+            <h3 id="bookingModalTitle" class="font-bold">Data Penyewa</h3>
+            <p class="text-xs text-muted mt-0.5">Isi form & kirim via WhatsApp</p>
+          </div>
+        </div>
+        <button id="closeBookingBtn" class="p-2 rounded-xl text-muted hover:text-light hover:bg-mid transition-all" aria-label="Tutup">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
-      <form id="bookingForm" novalidate class="p-5 space-y-4" autocomplete="off">
+
+      <!-- Form -->
+      <form id="bookingForm" novalidate class="px-6 py-5 space-y-4" autocomplete="off">
         <div>
-          <label class="block text-xs font-semibold text-muted mb-1.5" for="namaInput">Nama Penyewa <span class="text-danger">*</span></label>
-          <input id="namaInput" type="text" placeholder="Contoh: Budi Santoso" maxlength="60" class="w-full bg-mid border border-mid/60 rounded-xl px-4 py-3 text-sm placeholder-muted text-light focus:outline-none focus:border-electric transition-colors" required autocomplete="off" />
-          <span id="namaError" class="text-danger text-xs mt-1 hidden"></span>
+          <label class="modal-label" for="namaInput">Nama Penyewa <span class="text-danger">*</span></label>
+          <input id="namaInput" class="modal-input" type="text" placeholder="Contoh: Budi Santoso" maxlength="60" required autocomplete="off" />
+          <span id="namaError" class="text-danger text-xs mt-1.5 hidden block"></span>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-muted mb-1.5" for="jadwalInput">Jadwal Sewa <span class="text-danger">*</span></label>
-          <input id="jadwalInput" type="datetime-local" class="w-full bg-mid border border-mid/60 rounded-xl px-4 py-3 text-sm text-light focus:outline-none focus:border-electric transition-colors" required />
-          <span id="jadwalError" class="text-danger text-xs mt-1 hidden"></span>
+          <label class="modal-label" for="jadwalInput">Jadwal Sewa <span class="text-danger">*</span></label>
+          <input id="jadwalInput" class="modal-input" type="datetime-local" required />
+          <span id="jadwalError" class="text-danger text-xs mt-1.5 hidden block"></span>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-muted mb-1.5" for="catatanInput">Catatan / Lokasi Antar</label>
-          <textarea id="catatanInput" placeholder="Contoh: Antar ke Jl. Merdeka No. 10, ingin game FIFA 25" maxlength="300" rows="3" class="w-full bg-mid border border-mid/60 rounded-xl px-4 py-3 text-sm placeholder-muted text-light focus:outline-none focus:border-electric transition-colors resize-none"></textarea>
+          <label class="modal-label" for="catatanInput">Catatan / Lokasi Antar</label>
+          <textarea id="catatanInput" class="modal-input resize-none" placeholder="Contoh: Antar ke Jl. Merdeka No. 10, ingin game FIFA 25" maxlength="300" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn-primary w-full py-3.5 rounded-xl font-bold text-sm">
-          📲 Kirim via WhatsApp
+        <button type="submit" class="btn-primary w-full py-4 rounded-xl font-bold">
+          📲 Kirim Pesanan via WhatsApp
         </button>
       </form>
     </div>
   </div>
 
-  <!-- ===== TOAST CONTAINER ===== -->
+  <!-- ============================================================
+       TOAST
+       ============================================================ -->
   <div id="toastContainer" class="fixed top-4 right-4 z-[60] flex flex-col gap-2 pointer-events-none max-w-xs w-full"></div>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="bg-surface border-t border-mid/40 py-12 px-4 sm:px-6 lg:px-8 mt-8">
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer-bg mt-16 py-14 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
-      <div class="grid sm:grid-cols-3 gap-8 mb-8">
-        <div>
-          <div class="text-xl font-black mb-3"><span class="text-electric">Rental</span><span class="text-cyan">PS</span></div>
-          <p class="text-muted text-sm leading-relaxed">Platform sewa PlayStation PS4 & PS5 terpercaya. Harga bersahabat, unit bersih, booking mudah.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+
+        <!-- Brand -->
+        <div class="sm:col-span-2 lg:col-span-1">
+          <a href="#hero" class="inline-flex items-center gap-2.5 mb-4">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-electric to-cyan flex items-center justify-center text-lg shadow-glow-sm">🎮</div>
+            <span class="text-lg font-black">
+              <span>Rental</span><span style="background:linear-gradient(135deg,#60A5FA,#22D3EE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PS</span>
+            </span>
+          </a>
+          <p class="text-muted text-sm leading-relaxed">Platform sewa PS4 & PS5 terpercaya. Harga bersahabat, unit bersih, booking mudah.</p>
         </div>
+
+        <!-- Nav -->
         <div>
-          <div class="font-semibold mb-3 text-sm">Navigasi</div>
-          <ul class="space-y-2 text-sm text-muted">
-            <li><a href="#hero"    class="hover:text-light transition-colors">Beranda</a></li>
-            <li><a href="#about"   class="hover:text-light transition-colors">Tentang Kami</a></li>
-            <li><a href="#paket"   class="hover:text-light transition-colors">Paket & Harga</a></li>
-            <li><a href="#catalog" class="hover:text-light transition-colors">Katalog Unit</a></li>
+          <div class="text-xs font-bold uppercase tracking-widest text-muted mb-4">Navigasi</div>
+          <ul class="space-y-2.5">
+            <li><a href="#hero"    class="footer-link">Beranda</a></li>
+            <li><a href="#about"   class="footer-link">Tentang Kami</a></li>
+            <li><a href="#paket"   class="footer-link">Paket & Harga</a></li>
+            <li><a href="#catalog" class="footer-link">Katalog Unit</a></li>
           </ul>
         </div>
+
+        <!-- Paket -->
         <div>
-          <div class="font-semibold mb-3 text-sm">Hubungi Kami</div>
-          <ul class="space-y-2 text-sm text-muted">
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-cyan flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.136.556 4.136 1.527 5.869L0 24l6.335-1.52A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.973 0-3.84-.535-5.44-1.47l-.389-.232-4.055.973.985-3.957-.254-.406A9.787 9.787 0 0 1 2.182 12C2.182 6.584 6.584 2.182 12 2.182c5.416 0 9.818 4.402 9.818 9.818 0 5.417-4.402 9.818-9.818 9.818z"/></svg>
-              <a href="https://wa.me/6281234567890" class="hover:text-light transition-colors" target="_blank" rel="noopener noreferrer">+62 812-3456-7890</a>
+          <div class="text-xs font-bold uppercase tracking-widest text-muted mb-4">Paket</div>
+          <ul class="space-y-2.5">
+            <li><a href="#catalog" class="footer-link">PS4 Harian</a></li>
+            <li><a href="#catalog" class="footer-link">PS5 Harian</a></li>
+            <li><a href="#catalog" class="footer-link">Paket Weekend</a></li>
+            <li><a href="#catalog" class="footer-link">Tambah Stik</a></li>
+          </ul>
+        </div>
+
+        <!-- Kontak -->
+        <div>
+          <div class="text-xs font-bold uppercase tracking-widest text-muted mb-4">Hubungi Kami</div>
+          <ul class="space-y-3">
+            <li>
+              <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer"
+                 class="footer-link flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-lg bg-success/15 border border-success/25 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-3.5 h-3.5 text-success" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                    <path d="M12 0C5.374 0 0 5.373 0 12c0 2.136.556 4.136 1.527 5.869L0 24l6.335-1.52A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.973 0-3.84-.535-5.44-1.47l-.389-.232-4.055.973.985-3.957-.254-.406A9.787 9.787 0 0 1 2.182 12C2.182 6.584 6.584 2.182 12 2.182c5.416 0 9.818 4.402 9.818 9.818 0 5.417-4.402 9.818-9.818 9.818z"/>
+                  </svg>
+                </div>
+                +62 812-3456-7890
+              </a>
             </li>
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-cyan flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
-              <span>Kota Contoh, Indonesia</span>
+            <li class="flex items-center gap-2.5 text-muted text-sm">
+              <div class="w-7 h-7 rounded-lg bg-cyan/10 border border-cyan/20 flex items-center justify-center flex-shrink-0">
+                <svg class="w-3.5 h-3.5 text-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0zM15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                </svg>
+              </div>
+              Kota Contoh, Indonesia
             </li>
           </ul>
         </div>
+
       </div>
-      <div class="border-t border-mid/40 pt-6 text-center text-xs text-muted">
-        &copy; 2025 RentalPS. Dibuat dengan ❤️ untuk para gamer Indonesia.
+
+      <!-- Bottom bar -->
+      <div class="pt-8 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted">
+        <span>&copy; 2025 RentalPS. Dibuat dengan ❤️ untuk para gamer Indonesia.</span>
+        <span class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-success" style="box-shadow:0 0 6px #10B981"></span>
+          Semua sistem berjalan normal
+        </span>
       </div>
     </div>
   </footer>
