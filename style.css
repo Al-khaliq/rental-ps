@@ -43,6 +43,76 @@ body::before {
   pointer-events: none;
 }
 
+/* ---- Lightweight GPU-Only PlayStation Background Animation ---- */
+.ps-ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+.ps-aurora {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.35;
+  will-change: transform;
+}
+.ps-aurora-1 {
+  width: 55vw;
+  height: 55vw;
+  max-width: 680px;
+  max-height: 680px;
+  top: -12%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(0, 112, 209, 0.28) 0%, rgba(0, 67, 156, 0.08) 45%, transparent 70%);
+  animation: psAuroraDrift1 22s ease-in-out infinite alternate;
+}
+.ps-aurora-2 {
+  width: 50vw;
+  height: 50vw;
+  max-width: 620px;
+  max-height: 620px;
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.22) 0%, rgba(0, 67, 156, 0.08) 45%, transparent 70%);
+  animation: psAuroraDrift2 26s ease-in-out infinite alternate;
+}
+
+.ps-float {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  opacity: 0.11;
+  will-change: transform;
+}
+.ps-f1 { left: 8%;  top: 18%; animation: psSymbolFloat 19s ease-in-out infinite; }
+.ps-f2 { left: 86%; top: 22%; animation: psSymbolFloat 23s ease-in-out infinite reverse; width: 22px; height: 22px; }
+.ps-f3 { left: 16%; top: 68%; animation: psSymbolFloat 25s ease-in-out infinite 2s; width: 28px; height: 28px; }
+.ps-f4 { left: 78%; top: 72%; animation: psSymbolFloat 21s ease-in-out infinite 1s; }
+.ps-f5 { left: 48%; top: 85%; animation: psSymbolFloat 27s ease-in-out infinite reverse 3s; width: 20px; height: 20px; }
+.ps-f6 { left: 32%; top: 34%; animation: psSymbolFloat 24s ease-in-out infinite 4s; width: 20px; height: 20px; opacity: 0.08; }
+.ps-f7 { left: 66%; top: 44%; animation: psSymbolFloat 20s ease-in-out infinite reverse 2s; width: 24px; height: 24px; opacity: 0.09; }
+.ps-f8 { left: 92%; top: 52%; animation: psSymbolFloat 28s ease-in-out infinite 5s; width: 22px; height: 22px; opacity: 0.08; }
+
+@keyframes psAuroraDrift1 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(5vw, 4vh, 0) scale(1.08); }
+}
+@keyframes psAuroraDrift2 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-5vw, -4vh, 0) scale(1.07); }
+}
+@keyframes psSymbolFloat {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50%      { transform: translate3d(14px, -28px, 0) rotate(18deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-aurora, .ps-float { animation: none !important; }
+}
+
 /* ---- Typography ---- */
 .gradient-text {
   background: linear-gradient(135deg, #60A5FA 0%, #0070D1 45%, #22D3EE 100%);
