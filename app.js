@@ -224,59 +224,69 @@ function renderPaket() {
   PAKET_DATA.forEach((p, idx) => {
     const card = document.createElement('div');
     card.className = `paket-card${p.featured ? ' featured' : ''}`;
-    card.style.animationDelay = `${idx * 0.06}s`;
+    card.style.animationDelay = `${idx * 0.07}s`;
 
     if (p.featured) {
       const badge = document.createElement('div');
-      badge.className = 'absolute top-3 right-3 bg-electric text-white text-xs font-bold px-2.5 py-0.5 rounded-full';
+      badge.className = 'badge-terlaris';
       badge.textContent = '⭐ Terlaris';
       card.appendChild(badge);
     }
 
-    const emojiEl = document.createElement('div');
-    emojiEl.className = 'text-3xl';
-    emojiEl.textContent = p.emoji;
+    const emojiBox = document.createElement('div');
+    emojiBox.className = 'paket-emoji';
+    emojiBox.textContent = p.emoji;
+    card.appendChild(emojiBox);
 
     const nameEl = document.createElement('div');
     nameEl.className = 'font-bold text-sm leading-tight';
     nameEl.textContent = p.nama;
+    card.appendChild(nameEl);
 
     const hargaEl = document.createElement('div');
-    hargaEl.className = 'text-electric font-black text-xl';
+    hargaEl.className = 'paket-price';
     hargaEl.textContent = formatRp(p.harga);
+    card.appendChild(hargaEl);
 
     const descEl = document.createElement('div');
-    descEl.className = 'text-muted text-xs leading-relaxed';
+    descEl.className = 'text-xs leading-relaxed mb-2';
+    descEl.style.color = 'var(--muted2)';
     descEl.textContent = p.deskripsi;
+    card.appendChild(descEl);
 
-    const inklusifEl = document.createElement('ul');
-    inklusifEl.className = 'space-y-1 mt-auto';
+    const divider = document.createElement('div');
+    divider.className = 'paket-divider';
+    card.appendChild(divider);
+
+    const inklusifEl = document.createElement('div');
+    inklusifEl.className = 'space-y-0.5 mb-4';
     p.inklusif.forEach(item => {
-      const li = document.createElement('li');
-      li.className = 'text-xs text-muted flex items-center gap-1.5';
-      const check = document.createElement('span');
-      check.className = 'text-cyan';
-      check.textContent = '✓';
+      const row = document.createElement('div');
+      row.className = 'paket-include-item';
+      const icon = document.createElement('span');
+      icon.textContent = '✓';
+      icon.style.color = 'var(--cyan)';
+      icon.style.fontWeight = '700';
+      icon.style.fontSize = '0.65rem';
       const t = document.createElement('span');
       t.textContent = item;
-      li.appendChild(check);
-      li.appendChild(t);
-      inklusifEl.appendChild(li);
+      row.appendChild(icon);
+      row.appendChild(t);
+      inklusifEl.appendChild(row);
     });
+    card.appendChild(inklusifEl);
 
     const btn = document.createElement('button');
-    btn.className = p.tersedia
-      ? 'btn-primary w-full py-2.5 rounded-lg text-sm font-semibold mt-2'
-      : 'w-full py-2.5 rounded-lg text-sm font-semibold mt-2 bg-mid text-muted cursor-not-allowed';
-    btn.textContent = p.tersedia ? '+ Tambah ke Keranjang' : 'Stok Habis';
-    btn.disabled = !p.tersedia;
-    if (p.tersedia) btn.addEventListener('click', () => addToCart(p.id));
-
-    card.appendChild(emojiEl);
-    card.appendChild(nameEl);
-    card.appendChild(hargaEl);
-    card.appendChild(descEl);
-    card.appendChild(inklusifEl);
+    if (p.tersedia) {
+      btn.className = 'btn-primary w-full py-2.5 rounded-xl text-sm font-semibold mt-auto';
+      btn.textContent = '+ Tambah ke Keranjang';
+      btn.addEventListener('click', () => addToCart(p.id));
+    } else {
+      btn.className = 'w-full py-2.5 rounded-xl text-sm font-semibold mt-auto cursor-not-allowed';
+      btn.style.cssText = 'background:rgba(35,42,56,0.5);color:var(--muted);border:1px solid var(--border)';
+      btn.textContent = 'Stok Habis';
+      btn.disabled = true;
+    }
     card.appendChild(btn);
     grid.appendChild(card);
   });
@@ -307,76 +317,75 @@ function renderCatalog(filterKat = 'semua', query = '') {
     card.className = `unit-card${!p.tersedia ? ' unavailable' : ''}`;
     card.style.animationDelay = `${idx * 0.07}s`;
 
-    // Image area
+    /* --- Emoji banner --- */
     const imgBox = document.createElement('div');
     imgBox.className = 'unit-emoji-box';
+
     const emojiSpan = document.createElement('span');
+    emojiSpan.className = 'unit-emoji';
     emojiSpan.textContent = p.emoji;
+    imgBox.appendChild(emojiSpan);
+
     if (p.featured) {
       const starBadge = document.createElement('span');
-      starBadge.className = 'absolute top-3 left-3 bg-electric text-white text-xs font-bold px-2 py-0.5 rounded-full';
+      starBadge.className = 'status-badge';
+      starBadge.style.cssText = 'top:0.75rem;left:0.75rem;right:auto;background:linear-gradient(135deg,#2563EB,#06B6D4);color:#fff;border:none';
       starBadge.textContent = '⭐ Terlaris';
       imgBox.appendChild(starBadge);
     }
-    imgBox.appendChild(emojiSpan);
 
-    // Status badge
     let statusClass, statusText;
-    if (!p.tersedia || p.stok === 0) {
-      statusClass = 'status-unavailable'; statusText = 'Stok Habis';
-    } else if (p.stok <= 3) {
-      statusClass = 'status-limited'; statusText = `Sisa ${p.stok} Unit`;
-    } else {
-      statusClass = 'status-available'; statusText = 'Tersedia';
-    }
-    const statusBadge = document.createElement('div');
-    statusBadge.className = `absolute top-3 right-3 ${statusClass} text-xs font-semibold px-2.5 py-1 rounded-full`;
-    statusBadge.textContent = statusText;
-    imgBox.style.position = 'relative';
-    imgBox.appendChild(statusBadge);
+    if (!p.tersedia || p.stok === 0) { statusClass = 'status-unavailable'; statusText = 'Stok Habis'; }
+    else if (p.stok <= 3)            { statusClass = 'status-limited';     statusText = `Sisa ${p.stok}`; }
+    else                              { statusClass = 'status-available';   statusText = 'Tersedia'; }
 
+    const statusBadge = document.createElement('div');
+    statusBadge.className = `status-badge ${statusClass}`;
+    statusBadge.textContent = statusText;
+    imgBox.appendChild(statusBadge);
     card.appendChild(imgBox);
 
-    // Body
+    /* --- Body --- */
     const body = document.createElement('div');
-    body.className = 'p-4 flex flex-col gap-3 flex-1';
+    body.className = 'unit-body';
 
     const nameEl = document.createElement('div');
-    nameEl.className = 'font-bold text-sm leading-tight';
+    nameEl.className = 'unit-name';
     nameEl.textContent = p.nama;
 
     const descEl = document.createElement('div');
-    descEl.className = 'text-muted text-xs leading-relaxed';
+    descEl.className = 'unit-desc';
     descEl.textContent = p.deskripsi;
 
-    const hargaRow = document.createElement('div');
-    hargaRow.className = 'flex items-end justify-between mt-auto pt-2 border-t border-mid/40';
+    const priceRow = document.createElement('div');
+    priceRow.className = 'unit-price-row';
 
-    const hargaEl = document.createElement('div');
-    hargaEl.className = 'text-electric font-black text-lg';
-    hargaEl.textContent = formatRp(p.harga);
+    const priceEl = document.createElement('div');
+    priceEl.className = 'unit-price';
+    priceEl.textContent = formatRp(p.harga);
 
     const perEl = document.createElement('div');
-    perEl.className = 'text-muted text-xs';
+    perEl.className = 'unit-per';
     perEl.textContent = p.kategori === 'weekend' ? '/paket' : '/hari';
 
-    hargaRow.appendChild(hargaEl);
-    hargaRow.appendChild(perEl);
+    priceRow.appendChild(priceEl);
+    priceRow.appendChild(perEl);
 
     const btn = document.createElement('button');
     if (p.tersedia && p.stok > 0) {
-      btn.className = 'btn-primary w-full py-2.5 rounded-lg text-sm font-semibold';
+      btn.className = 'btn-primary w-full py-2.5 rounded-xl text-sm font-semibold mt-1';
       btn.textContent = '+ Tambah ke Keranjang';
       btn.addEventListener('click', () => addToCart(p.id));
     } else {
-      btn.className = 'w-full py-2.5 rounded-lg text-sm font-semibold bg-mid text-muted cursor-not-allowed';
+      btn.className = 'w-full py-2.5 rounded-xl text-sm font-semibold mt-1 cursor-not-allowed';
+      btn.style.cssText = 'background:rgba(35,42,56,0.5);color:var(--muted);border:1px solid var(--border)';
       btn.textContent = 'Stok Habis';
       btn.disabled = true;
     }
 
     body.appendChild(nameEl);
     body.appendChild(descEl);
-    body.appendChild(hargaRow);
+    body.appendChild(priceRow);
     body.appendChild(btn);
     card.appendChild(body);
     grid.appendChild(card);
@@ -646,16 +655,27 @@ function handleBookingSubmit(e) {
 
 /* ---- MOBILE MENU ---- */
 function initMobileMenu() {
-  const btn  = document.getElementById('menuBtn');
-  const menu = document.getElementById('mobileMenu');
+  const btn      = document.getElementById('menuBtn');
+  const menu     = document.getElementById('mobileMenu');
+  const iconMenu  = document.getElementById('iconMenu');
+  const iconClose = document.getElementById('iconClose');
   if (!btn || !menu) return;
+
   btn.addEventListener('click', () => {
-    const open = !menu.classList.contains('hidden');
-    menu.classList.toggle('hidden', open);
-    btn.setAttribute('aria-expanded', String(!open));
+    const isOpen = !menu.classList.contains('hidden');
+    menu.classList.toggle('hidden', isOpen);
+    if (iconMenu)  iconMenu.classList.toggle('hidden', !isOpen);
+    if (iconClose) iconClose.classList.toggle('hidden', isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
   });
+
   document.querySelectorAll('.mobile-nav-link').forEach(a => {
-    a.addEventListener('click', () => menu.classList.add('hidden'));
+    a.addEventListener('click', () => {
+      menu.classList.add('hidden');
+      if (iconMenu)  iconMenu.classList.remove('hidden');
+      if (iconClose) iconClose.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+    });
   });
 }
 
