@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" fill="none">
+  <defs>
+    <radialGradient id="spot4" cx="50%" cy="55%" r="48%">
+      <stop offset="0%" stop-color="#0070D1" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#00439C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ps4Body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#272D3D"/>
+      <stop offset="100%" stop-color="#0B0F19"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="200" cy="236" rx="135" ry="18" fill="#000" fill-opacity="0.45"/>
+  <circle cx="200" cy="140" r="120" fill="url(#spot4)"/>
+
+  <!-- PS4 Slim Console (Matte Black 2-tier rounded) -->
+  <g transform="translate(68, 84)">
+    <!-- Top tier -->
+    <rect x="0" y="0" width="210" height="24" rx="6" fill="url(#ps4Body)" stroke="#334155" stroke-width="1"/>
+    <!-- Recessed middle groove -->
+    <rect x="6" y="23" width="198" height="5" fill="#050811"/>
+    <!-- Bottom tier -->
+    <rect x="2" y="28" width="206" height="22" rx="6" fill="#111827" stroke="#1E293B" stroke-width="1"/>
+    <!-- Blue LED power indicator -->
+    <rect x="18" y="24" width="38" height="2.5" rx="1" fill="#0070D1"/>
+    <rect x="20" y="24.5" width="22" height="1.5" rx="1" fill="#38BDF8"/>
+    <!-- Disc slot -->
+    <rect x="70" y="24.5" width="84" height="2" rx="1" fill="#020617"/>
+    <!-- PS logo top -->
+    <text x="16" y="16" fill="#94A3B8" font-family="sans-serif" font-size="9" font-weight="bold">PS4</text>
+  </g>
+
+  <!-- DualShock 4 Black Controller -->
+  <g transform="translate(190, 134)">
+    <path d="M22,34 C22,16 42,10 58,18 L102,18 C118,10 138,16 138,34 L148,80 C151,95 135,104 122,92 L107,72 L53,72 L38,92 C25,104 9,95 12,80 Z" fill="#181F2E" stroke="#334155" stroke-width="1.2"/>
+    <!-- Touchpad -->
+    <rect x="57" y="19" width="46" height="26" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+    <!-- Lightbar -->
+    <rect x="64" y="21" width="32" height="2.5" rx="1" fill="#06B6D4"/>
+    <!-- Analog sticks -->
+    <circle cx="58" cy="58" r="9" fill="#090D16" stroke="#475569" stroke-width="1.5"/>
+    <circle cx="102" cy="58" r="9" fill="#090D16" stroke="#475569" stroke-width="1.5"/>
+    <!-- D-pad -->
+    <rect x="32" y="34" width="14" height="4" rx="1" fill="#334155"/>
+    <rect x="37" y="29" width="4" height="14" rx="1" fill="#334155"/>
+    <!-- Colored PS Face Buttons -->
+    <circle cx="122" cy="29" r="3" fill="#10B981"/>
+    <circle cx="129" cy="36" r="3" fill="#EF4444"/>
+    <circle cx="122" cy="43" r="3" fill="#3B82F6"/>
+    <circle cx="115" cy="36" r="3" fill="#EC4899"/>
+    <!-- PS Button -->
+    <circle cx="80" cy="58" r="3.5" fill="#0F172A" stroke="#64748B" stroke-width="1"/>
+  </g>
+</svg>

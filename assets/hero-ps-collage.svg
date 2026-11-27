@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050A18"/>
+      <stop offset="45%" stop-color="#001E4D"/>
+      <stop offset="100%" stop-color="#090D1A"/>
+    </linearGradient>
+    <radialGradient id="gowGlow" cx="18%" cy="35%" r="35%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#00439C" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00439C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="spideyGlow" cx="82%" cy="30%" r="35%">
+      <stop offset="0%" stop-color="#EF4444" stop-opacity="0.32"/>
+      <stop offset="55%" stop-color="#7C3AED" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fcGlow" cx="50%" cy="85%" r="45%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.24"/>
+      <stop offset="55%" stop-color="#0070D1" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="psBlueLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00439C" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#0070D1" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1440" height="700" fill="url(#bgGrad)"/>
+  <rect width="1440" height="700" fill="url(#gowGlow)"/>
+  <rect width="1440" height="700" fill="url(#spideyGlow)"/>
+  <rect width="1440" height="700" fill="url(#fcGlow)"/>
+
+  <!-- Stadium / FC 25 perspective pitch lines -->
+  <g stroke="#0070D1" stroke-opacity="0.18" stroke-width="1.5" fill="none">
+    <ellipse cx="720" cy="650" rx="520" ry="130"/>
+    <ellipse cx="720" cy="650" rx="180" ry="50"/>
+    <line x1="0" y1="620" x2="1440" y2="620"/>
+    <line x1="200" y1="700" x2="520" y2="470"/>
+    <line x1="1240" y1="700" x2="920" y2="470"/>
+  </g>
+
+  <!-- Spider-Man inspired web geometry top-right -->
+  <g stroke="#EF4444" stroke-opacity="0.16" stroke-width="1.2" fill="none">
+    <line x1="1440" y1="0" x2="1080" y2="260"/>
+    <line x1="1440" y1="0" x2="1190" y2="380"/>
+    <line x1="1440" y1="0" x2="1340" y2="420"/>
+    <line x1="1440" y1="0" x2="980" y2="120"/>
+    <path d="M1130 90 Q1220 140 1280 240 Q1350 280 1420 260"/>
+    <path d="M1220 45 Q1290 100 1340 175 Q1390 210 1440 200"/>
+    <path d="M1040 140 Q1140 200 1210 310 Q1300 350 1390 340"/>
+  </g>
+
+  <!-- God of War inspired Nordic runes / ice shards top-left -->
+  <g stroke="#38BDF8" stroke-opacity="0.2" stroke-width="1.5" fill="none">
+    <polygon points="120,120 185,220 95,290" fill="#38BDF8" fill-opacity="0.04"/>
+    <polygon points="210,80 290,170 190,210" fill="#0070D1" fill-opacity="0.06"/>
+    <line x1="70" y1="160" x2="70" y2="330"/>
+    <line x1="70" y1="210" x2="110" y2="175"/>
+    <line x1="70" y1="245" x2="105" y2="280"/>
+  </g>
+
+  <!-- Floating PlayStation Symbols -->
+  <g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.22">
+    <!-- Triangle -->
+    <polygon points="290,430 315,475 265,475" stroke="#10B981"/>
+    <!-- Circle -->
+    <circle cx="1140" cy="450" r="24" stroke="#EF4444"/>
+    <!-- Cross -->
+    <g stroke="#60A5FA">
+      <line x1="190" y1="530" x2="225" y2="565"/>
+      <line x1="225" y1="530" x2="190" y2="565"/>
+    </g>
+    <!-- Square -->
+    <rect x="1220" y="290" width="38" height="38" rx="4" stroke="#EC4899"/>
+    <!-- Extra subtle symbols -->
+    <polygon points="1030,110 1048,142 1012,142" stroke="#10B981" opacity="0.7"/>
+    <circle cx="410" cy="140" r="16" stroke="#EF4444" opacity="0.7"/>
+    <rect x="930" y="510" width="28" height="28" rx="3" stroke="#EC4899" opacity="0.7"/>
+  </g>
+
+  <!-- Subtle PS5 & DualSense Silhouette Right/Left Framing -->
+  <g opacity="0.16" transform="translate(110, 260) rotate(-8)">
+    <rect x="0" y="0" width="52" height="170" rx="8" fill="#E2E8F0"/>
+    <rect x="14" y="8" width="24" height="158" rx="4" fill="#0F172A"/>
+    <line x1="13" y1="14" x2="13" y2="155" stroke="#0070D1" stroke-width="3"/>
+    <line x1="39" y1="14" x2="39" y2="155" stroke="#0070D1" stroke-width="3"/>
+  </g>
+
+  <g opacity="0.16" transform="translate(1210, 390) rotate(12)">
+    <path d="M20,40 C20,18 45,10 65,18 L115,18 C135,10 160,18 160,40 L172,95 C175,112 155,122 142,108 L124,84 L56,84 L38,108 C25,122 5,112 8,95 Z" fill="#F8FAFC"/>
+    <path d="M52,22 L128,22 L120,56 L60,56 Z" fill="#0F172A"/>
+    <line x1="56" y1="24" x2="63" y2="54" stroke="#0070D1" stroke-width="2.5"/>
+    <line x1="124" y1="24" x2="117" y2="54" stroke="#0070D1" stroke-width="2.5"/>
+  </g>
+
+  <!-- Neon Horizon Accent Line -->
+  <rect x="0" y="695" width="1440" height="5" fill="url(#psBlueLine)"/>
+</svg>

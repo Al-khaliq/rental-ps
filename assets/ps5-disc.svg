@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" fill="none">
+  <defs>
+    <radialGradient id="spot5" cx="50%" cy="55%" r="48%">
+      <stop offset="0%" stop-color="#0070D1" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#00439C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="whitePanel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <linearGradient id="blackCore" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#090D16"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="200" cy="238" rx="130" ry="18" fill="#000" fill-opacity="0.45"/>
+  <circle cx="200" cy="140" r="120" fill="url(#spot5)"/>
+
+  <!-- PS5 Disc Edition Console -->
+  <g transform="translate(115, 28)">
+    <!-- Stand -->
+    <ellipse cx="52" cy="204" rx="44" ry="8" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+    <!-- Left white wing -->
+    <path d="M18,12 C28,2 42,6 42,20 L42,198 L20,198 C15,140 12,68 18,12 Z" fill="url(#whitePanel)"/>
+    <!-- Black glossy center -->
+    <path d="M40,14 L66,14 L66,198 L40,198 Z" fill="url(#blackCore)"/>
+    <!-- Blue LED strips -->
+    <path d="M40,18 L40,130" stroke="#0070D1" stroke-width="3" stroke-linecap="round"/>
+    <path d="M66,18 L66,130" stroke="#0070D1" stroke-width="3" stroke-linecap="round"/>
+    <path d="M40,18 L40,95" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M66,18 L66,95" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Right white wing with Disc Drive bulge -->
+    <path d="M64,18 C64,5 78,2 86,12 C92,55 96,115 96,158 C96,182 90,194 84,198 L64,198 Z" fill="url(#whitePanel)"/>
+    <!-- Disc slot -->
+    <rect x="85" y="108" width="3" height="58" rx="1.5" fill="#0F172A"/>
+    <!-- USB port -->
+    <rect x="51" y="156" width="4" height="10" rx="1" fill="#475569"/>
+  </g>
+
+  <!-- DualSense Controller beside PS5 -->
+  <g transform="translate(208, 138)">
+    <!-- Grips & body (white) -->
+    <path d="M22,34 C22,16 42,10 58,18 L102,18 C118,10 138,16 138,34 L148,80 C151,95 135,104 122,92 L107,72 L53,72 L38,92 C25,104 9,95 12,80 Z" fill="url(#whitePanel)"/>
+    <!-- Black lower trim -->
+    <path d="M48,54 L112,54 L107,72 L53,72 Z" fill="#0F172A"/>
+    <!-- Touchpad -->
+    <path d="M54,18 L106,18 L101,46 L59,46 Z" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1"/>
+    <!-- Blue lightbar around touchpad -->
+    <path d="M54,20 L59,46 M106,20 L101,46" stroke="#0070D1" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Analog sticks -->
+    <circle cx="58" cy="60" r="9" fill="#1E293B" stroke="#475569" stroke-width="1.5"/>
+    <circle cx="102" cy="60" r="9" fill="#1E293B" stroke="#475569" stroke-width="1.5"/>
+    <!-- D-pad -->
+    <rect x="33" y="34" width="12" height="4" rx="1" fill="#CBD5E1" stroke="#64748B" stroke-width="0.8"/>
+    <rect x="37" y="30" width="4" height="12" rx="1" fill="#CBD5E1" stroke="#64748B" stroke-width="0.8"/>
+    <!-- Action buttons -->
+    <circle cx="121" cy="30" r="2.5" fill="#64748B"/>
+    <circle cx="127" cy="36" r="2.5" fill="#64748B"/>
+    <circle cx="121" cy="42" r="2.5" fill="#64748B"/>
+    <circle cx="115" cy="36" r="2.5" fill="#64748B"/>
+    <!-- PS Button -->
+    <circle cx="80" cy="60" r="3.5" fill="#0070D1"/>
+  </g>
+</svg>
